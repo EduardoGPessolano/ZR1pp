@@ -1,0 +1,5 @@
+libqt5serialport5-dev
+sudo apt install libqt5webkit5-dev
+sudo apt install qtwebengine5-dev
+sudo apt install qtconnectivity5-dev
+sudo apt install libbluetooth-dev
