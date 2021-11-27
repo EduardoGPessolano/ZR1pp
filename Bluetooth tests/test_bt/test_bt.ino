@@ -25,7 +25,7 @@ void loop()
       junk = Serial.read();
     }
     
-    if(inputString = "h")
+    if(inputString == "h")
     {
       digitalWrite(13, HIGH);
     }
