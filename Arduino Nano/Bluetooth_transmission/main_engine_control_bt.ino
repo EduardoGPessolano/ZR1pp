@@ -19,10 +19,10 @@ SoftwareSerial bluetooth(rxPin, txPin); //PINOS QUE EMULAM A SERIAL
 
 void setup()
 {
-    Serial.begin(9600);    //INICIALIZA A SERIAL
-    bluetooth.begin(9600); //INICIALIZA A SERIAL DO BLUETOOTH
+    Serial.begin(9600);    
+    bluetooth.begin(9600); 
 
-    delay(100); //INTERVALO DE 100 MILISSEGUNDOS
+    delay(100); 
 
     pinMode(rxPin, INPUT);
     pinMode(txPin, OUTPUT);
