@@ -4,7 +4,6 @@
 #include <QDebug>
 #include <QComboBox>
 
-
 #define MYARDUINO_ADDRESS "00:20:12:08:BA:44"
 #define MYARDUINO_NAME "hc05-arduino-nano"
 
@@ -100,7 +99,7 @@ void MainWindow::dataReady2Read()
     QString data2 = tr(data);
     ui->progressBar->setValue(data2.toDouble());
 
-    // juste show on interface
+    // show on interface
     //ui->textEdit->append("receive:"+QString(data));
 }
 
@@ -108,9 +107,9 @@ void MainWindow::dataReady2Read()
 //  SLOT when socket Connected
 void MainWindow::socketConnected(){
    // show on interface
-   ui->statusBar->showMessage(("Connected to: ZR1++"), 2000);
    socket->write("A\n");
    // enable Buttons
+   ui->statusBar->showMessage(("Connected to: ZR1++"), 2000);
    ui->progressBar->setEnabled(true);
    ui->drive_mode_label->setEnabled(true);
    ui->lights_mode_comboBox->setEnabled(true);
@@ -229,5 +228,3 @@ void MainWindow::on_lights_mode_comboBox_currentTextChanged(const QString &mode)
     else
         socket->write("A\n");
 }
-
-
