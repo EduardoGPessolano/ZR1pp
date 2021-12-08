@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view->load(QUrl("http://192.168.18.90"));
     view->show();
 
-     Check if Bluetooth is available on this device
+   //Check if Bluetooth is available on this device
 
     if (!localDevice.isValid())
     {
