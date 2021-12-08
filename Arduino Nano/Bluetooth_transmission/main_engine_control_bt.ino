@@ -19,10 +19,10 @@ SoftwareSerial bluetooth(rxPin, txPin); //PINOS QUE EMULAM A SERIAL
 
 void setup()
 {
-    Serial.begin(9600);    //INICIALIZA A SERIAL
-    bluetooth.begin(9600); //INICIALIZA A SERIAL DO BLUETOOTH
+    Serial.begin(9600);    
+    bluetooth.begin(9600); 
 
-    delay(100); //INTERVALO DE 100 MILISSEGUNDOS
+    delay(100); 
 
     pinMode(rxPin, INPUT);
     pinMode(txPin, OUTPUT);
@@ -37,20 +37,20 @@ void loop()
     char user_input;
     if (bluetooth.available())
     {
-        user_input = bluetooth.read(); //VARIÁVEL RECEBE O VALOR ENVIADO PELO BLUETOOTH
+        user_input = bluetooth.read(); 
 
         if (user_input == 'F')
-        {                              //SE O VALOR RECEBIDO FOR IGUAL A F, FAZ
+        {                              
             Serial.println("FORWARD"); 
             Forward();
         }
         if (user_input == 'B')
-        {                                //SE O VALOR RECEBIDO FOR IGUAL A B, FAZ
+        {                                
             Serial.println("BACKWARDS"); 
             Backwards();
         }
         if (user_input == 'S')
-        {                           //SE O VALOR RECEBIDO FOR IGUAL A S, FAZ
+        {                           
             Serial.println("STOP"); 
             Stop();
         }

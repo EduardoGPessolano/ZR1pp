@@ -1,10 +1,6 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-05-21T10:16:49
-#
-#-------------------------------------------------
 
-QT       += core gui bluetooth
+
+QT       += core gui bluetooth webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,9 +17,6 @@ FORMS    += mainwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
-
-RESOURCES += \
-    btrfcomm.qrc
 
 DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.jar \

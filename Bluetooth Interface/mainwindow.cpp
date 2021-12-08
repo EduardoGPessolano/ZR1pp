@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QComboBox>
+ #include <QWebEngineView>
 
 #define MYARDUINO_ADDRESS "00:20:12:08:BA:44"
 #define MYARDUINO_NAME "hc05-arduino-nano"
@@ -13,12 +14,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //QWebEngineView *view = new QWebEngineView(this->ui->centralwidget);
+    QWebEngineView *view = new QWebEngineView(this->ui->centralwidget);
 
-    //view->load(QUrl("http://192.168.18.90"));
-    //view->show();
+    view->load(QUrl("http://192.168.18.90"));
+    view->show();
 
-    // Check if Bluetooth is available on this device
+     Check if Bluetooth is available on this device
 
     if (!localDevice.isValid())
     {
@@ -79,7 +80,7 @@ void MainWindow::deviceDiscovered(const QBluetoothDeviceInfo device)
     // this is my Arduino device
     socket->connectToService(device.address(), 1); //Android
 
-    // socket->connectToService(device.address(),QBluetoothUuid(QBluetoothUuid::SerialPort));//Desktop
+    //socket->connectToService(device.address(),QBluetoothUuid(QBluetoothUuid::SerialPort));//Desktop
 
     socket->open(QIODevice::ReadWrite);
     if (socket->isOpen())
@@ -107,7 +108,9 @@ void MainWindow::dataReady2Read()
 //  SLOT when socket Connected
 void MainWindow::socketConnected(){
    // show on interface
+   socket->write("\n");
    socket->write("A\n");
+   socket->write("S\n");
    // enable Buttons
    ui->statusBar->showMessage(("Connected to: ZR1++"), 2000);
    ui->progressBar->setEnabled(true);
@@ -217,14 +220,11 @@ void MainWindow::on_lights_mode_comboBox_currentTextChanged(const QString &mode)
     ui->statusBar->showMessage(("Headlights mode: "+ mode), 2000);
 
     if(mode== "ON")
-    {
          socket->write("Y\n");
 
-    }
     if(mode == "OFF")
-    {
          socket->write("N\n");
-    }
-    else
+
+    if(mode == "AUTO")
         socket->write("A\n");
 }
