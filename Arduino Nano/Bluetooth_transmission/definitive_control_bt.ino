@@ -8,12 +8,11 @@
 #define MODULE_KEY 5   // the key pin of the HC05 module (AT mode)
 #define RX_PIN 10
 #define TX_PIN 11
-#define TAILLIGHTS 12
+#define HEADLIGHTS 7
+#define TAILLIGHTS 8
 #define LDR A0
 #define TMP A5
 #define AT_INIT         // AT configuration on startup
-
-//const int TMP = A5;    //This is the Arduino Pin that will read the sensor output
 
 SoftwareSerial btSerial(RX_PIN, TX_PIN); // connexion to HC05 
 
@@ -40,9 +39,8 @@ int direction;
 
 void setup()
 {
+  pinMode(HEADLIGHTS, OUTPUT);
   pinMode(TAILLIGHTS, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
 
   pinMode(ENGINE_INPUT1, OUTPUT);
   pinMode(ENGINE_INPUT2, OUTPUT);
@@ -86,7 +84,7 @@ void loop()
   }
   if (stringComplete)
   { // a command is available to proceed   
-      stringComplete = false;
+    stringComplete = false;
     //Serial.println(inputString);
       Serial.print(mem);
 
@@ -164,7 +162,6 @@ void engine_control(char &mode)
       break;
     }
 }
-
 void lights(char &mode)
 {
     int reading;
@@ -192,16 +189,14 @@ void lights(char &mode)
 //Steering wheel
 void turn(char &direction)
 {
-    int d;
+    int d = 104;
     switch (direction)
     {
     case 'R':
-      d = 130;
+      d = 180;
       break;
     case 'L':
-      d = 80;
-    default:
-      d = 105;
+      d = 0;
       break;
     }
     steeringWheel.write(d);
