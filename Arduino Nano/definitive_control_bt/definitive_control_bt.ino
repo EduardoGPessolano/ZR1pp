@@ -150,7 +150,6 @@ void loop()
 //   unsigned long t0 = millis(), t;
 //   int i = 0, j = strlen(rep);
 //   char c;
-
 //   for (i = 0; i < j;)
 //   {
 //     if (btSerial.available())
