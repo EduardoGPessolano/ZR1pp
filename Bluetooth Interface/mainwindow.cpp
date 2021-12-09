@@ -3,7 +3,6 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QComboBox>
- #include <QWebEngineView>
 
 #define MYARDUINO_ADDRESS "00:20:12:08:BA:44"
 #define MYARDUINO_NAME "hc05-arduino-nano"
@@ -14,12 +13,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QWebEngineView *view = new QWebEngineView(this->ui->centralwidget);
+//    QWebEngineView *view = new QWebEngineView(this->ui->centralwidget);
 
-    view->load(QUrl("http://192.168.18.90"));
-    view->show();
+//    view->load(QUrl("http://192.168.18.90"));
+//    view->show();
 
-     Check if Bluetooth is available on this device
+    // Check if Bluetooth is available on this device
 
     if (!localDevice.isValid())
     {
@@ -60,8 +59,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lights_mode_comboBox->setEnabled(false);
     ui->forward_pushButton->setEnabled(false);
     ui->backwards_pushButton->setEnabled(false);
-    ui->right_pushButton->setEnabled(false);
-    ui->left_pushButton->setEnabled(false);
+    ui->rightBackwards_pushButton->setEnabled(false);
+    ui->leftBackwards_pushButton->setEnabled(false);
+    ui->rightForward_pushButton->setEnabled(false);
+    ui->leftForward_pushButton->setEnabled(false);
+//    ui->right_pushButton->setEnabled(false);
+//    ui->left_pushButton->setEnabled(false);
     ui->progressBar->setEnabled(false);
 }
 
@@ -108,9 +111,7 @@ void MainWindow::dataReady2Read()
 //  SLOT when socket Connected
 void MainWindow::socketConnected(){
    // show on interface
-   socket->write("\n");
    socket->write("A\n");
-   socket->write("S\n");
    // enable Buttons
    ui->statusBar->showMessage(("Connected to: ZR1++"), 2000);
    ui->progressBar->setEnabled(true);
@@ -118,8 +119,12 @@ void MainWindow::socketConnected(){
    ui->lights_mode_comboBox->setEnabled(true);
    ui->forward_pushButton->setEnabled(true);
    ui->backwards_pushButton->setEnabled(true);
-   ui->right_pushButton->setEnabled(true);
-   ui->left_pushButton->setEnabled(true);
+   ui->rightBackwards_pushButton->setEnabled(true);
+   ui->leftBackwards_pushButton->setEnabled(true);
+   ui->rightForward_pushButton->setEnabled(true);
+   ui->leftForward_pushButton->setEnabled(true);
+//   ui->right_pushButton->setEnabled(true);
+//   ui->left_pushButton->setEnabled(true);
 }
 
 //____________________________________________________________________________________________________
@@ -174,43 +179,47 @@ void MainWindow::on_backwards_pushButton_released()
     ui->drive_mode_label->setText("N");
 }
 
-void MainWindow::on_left_pushButton_pressed()
-{
 
-    if (!socket->isOpen() || !socket->isWritable())return;
+//Previous left button
+//void MainWindow::on_left_pushButton_pressed()
+//{
 
-    socket->write("L\n");
-    //ui->textEdit->append("Send: L");
-    ui->drive_mode_label->setText("D");
-}
+//    if (!socket->isOpen() || !socket->isWritable())return;
 
-void MainWindow::on_left_pushButton_released()
-{
-    if (!socket->isOpen() || !socket->isWritable())return;
+//    socket->write("L\n");
+//    //ui->textEdit->append("Send: L");
+//    ui->drive_mode_label->setText("D");
+//}
 
-    socket->write("S\n");
-    //ui->textEdit->append("Send: S");
-    ui->drive_mode_label->setText("N");
-}
+//void MainWindow::on_left_pushButton_released()
+//{
+//    if (!socket->isOpen() || !socket->isWritable())return;
 
-void MainWindow::on_right_pushButton_pressed()
-{
+//    socket->write("S\n");
+//    //ui->textEdit->append("Send: S");
+//    ui->drive_mode_label->setText("N");
+//}
 
-    if (!socket->isOpen() || !socket->isWritable())return;
 
-    socket->write("R\n");
-    //ui->textEdit->append("Send: R");
-    ui->drive_mode_label->setText("D");
-}
+//Previous right button
+//void MainWindow::on_right_pushButton_pressed()
+//{
 
-void MainWindow::on_right_pushButton_released()
-{
-    if (!socket->isOpen() || !socket->isWritable())return;
+//    if (!socket->isOpen() || !socket->isWritable())return;
 
-    socket->write("S\n");
-    //ui->textEdit->append("Send: S");
-    ui->drive_mode_label->setText("N");
-}
+//    socket->write("R\n");
+//    //ui->textEdit->append("Send: R");
+//    ui->drive_mode_label->setText("D");
+//}
+
+//void MainWindow::on_right_pushButton_released()
+//{
+//    if (!socket->isOpen() || !socket->isWritable())return;
+
+//    socket->write("S\n");
+//    //ui->textEdit->append("Send: S");
+//    ui->drive_mode_label->setText("N");
+//}
 
 //____________________________________________________________________________________________________
 //  SLOT when lights modes are being changed
@@ -228,3 +237,80 @@ void MainWindow::on_lights_mode_comboBox_currentTextChanged(const QString &mode)
     if(mode == "AUTO")
         socket->write("A\n");
 }
+
+//Left Forward
+void MainWindow::on_leftForward_pushButton_pressed()
+{
+        if (!socket->isOpen() || !socket->isWritable())return;
+
+        socket->write("Q\n");
+        //ui->textEdit->append("Send: L");
+        ui->drive_mode_label->setText("D");
+}
+
+void MainWindow::on_leftForward_pushButton_released()
+{
+        if (!socket->isOpen() || !socket->isWritable())return;
+
+        socket->write("S\n");
+        //ui->textEdit->append("Send: S");
+        ui->drive_mode_label->setText("N");
+}
+
+//Right Forward
+void MainWindow::on_rightForward_pushButton_pressed()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("E\n");
+    //ui->textEdit->append("Send: L");
+    ui->drive_mode_label->setText("D");
+}
+
+void MainWindow::on_rightForward_pushButton_released()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("S\n");
+    //ui->textEdit->append("Send: S");
+    ui->drive_mode_label->setText("N");
+}
+
+//Left Backwards
+void MainWindow::on_leftBackwards_pushButton_pressed()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("Z\n");
+    //ui->textEdit->append("Send: L");
+    ui->drive_mode_label->setText("R");
+}
+
+void MainWindow::on_leftBackwards_pushButton_released()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("S\n");
+    //ui->textEdit->append("Send: S");
+    ui->drive_mode_label->setText("N");
+}
+
+//Right Backwards
+void MainWindow::on_rightBackwards_pushButton_pressed()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("C\n");
+    //ui->textEdit->append("Send: L");
+    ui->drive_mode_label->setText("R");
+}
+
+void MainWindow::on_rightBackwards_pushButton_released()
+{
+    if (!socket->isOpen() || !socket->isWritable())return;
+
+    socket->write("S\n");
+    //ui->textEdit->append("Send: S");
+    ui->drive_mode_label->setText("N");
+}
+

@@ -32,12 +32,20 @@ private slots:
     void on_forward_pushButton_released();
     void on_backwards_pushButton_pressed();
     void on_backwards_pushButton_released();
-    void on_left_pushButton_released();
-    void on_left_pushButton_pressed();
-    void on_right_pushButton_pressed();
-    void on_right_pushButton_released();
+//    void on_left_pushButton_released();
+//    void on_left_pushButton_pressed();
+//    void on_right_pushButton_pressed();
+//    void on_right_pushButton_released();
     void on_lights_mode_comboBox_currentTextChanged(const QString &mode);
 
+    void on_leftForward_pushButton_pressed();
+    void on_leftForward_pushButton_released();
+    void on_rightForward_pushButton_pressed();
+    void on_rightForward_pushButton_released();
+    void on_leftBackwards_pushButton_pressed();
+    void on_leftBackwards_pushButton_released();
+    void on_rightBackwards_pushButton_pressed();
+    void on_rightBackwards_pushButton_released();
 
 private:
     Ui::MainWindow *ui;

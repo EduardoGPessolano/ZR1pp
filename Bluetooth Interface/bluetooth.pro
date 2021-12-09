@@ -1,7 +1,6 @@
 
 
-QT       += core gui bluetooth webenginewidgets
-
+QT       += core gui bluetooth #webenginewidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = bluetooth
@@ -16,7 +15,6 @@ HEADERS  += mainwindow.h
 FORMS    += mainwindow.ui
 
 CONFIG += mobility
-MOBILITY = 
 
 DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.jar \
